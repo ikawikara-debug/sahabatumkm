@@ -1,0 +1,80 @@
+[00:38, 29/08/2025] Ika - Revlin: <!doctype html>
+<html lang="id">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Samples – FOODPRENEUR API</title>
+<style>
+  :root{--bg:#0f172a;--fg:#e2e8f0}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;max-width:920px;margin:28px auto;padding:0 16px}
+  .card{border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin:16px 0}
+  pre{background:#0b1020;color:#cbd5e1;border-radius:8px;padding:12px;overflow:auto}
+  button{background:#0f172a;color:#fff;border:0;border-radius:8px;padding:8px 14px;cursor:pointer}
+  input,textarea{width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px}
+  .row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+ …
+[00:40, 29/08/2025] Ika - Revlin: <!doctype html>
+<html lang="id">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Samples – FOODPRENEUR API</title>
+<style>
+  :root{--bg:#0f172a;--fg:#e2e8f0}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;max-width:920px;margin:28px auto;padding:0 16px}
+  .card{border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin:16px 0}
+  pre{background:#0b1020;color:#cbd5e1;border-radius:8px;padding:12px;overflow:auto}
+  button{background:#0f172a;color:#fff;border:0;border-radius:8px;padding:8px 14px;cursor:pointer}
+  input,textarea{width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px}
+  .row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+  small{color:#64748b}
+</style>
+
+<h1>Contoh Payload & Endpoint</h1>
+<p>Domain: <code id="dom"></code></p>
+
+<div class="card">
+  <h3>1) BEP – <code>/api/bep/compute</code></h3>
+  <div class="row">
+    <pre id="bep">{ "price":15000, "variableCost":8000, "fixedCost":3000000, "daysOpen":30 }</pre>
+    <button onclick="copy('bep')">Salin JSON</button>
+  </div>
+  <p><button onclick="call('bep','/api/bep/compute')">Tes panggil</button> <small id="bepOut"></small></p>
+</div>
+
+<div class="card">
+  <h3>2) HPP – <code>/api/hpp/compute</code></h3>
+  <div class="row">
+    <pre id="hpp">{
+  "items":[
+    {"ingredient":"Nasi","qty":5,"unit_price":16000},
+    {"ingredient":"Telur","qty":30,"unit_price":2000}
+  ],
+  "portions":50,
+  "margin":30
+}</pre>
+    <button onclick="copy('hpp')">Salin JSON</button>
+  </div>
+  <p><button onclick="call('hpp','/api/hpp/compute')">Tes panggil</button> <small id="hppOut"></small></p>
+</div>
+
+<div class="card">
+  <h3>3) Profit – <code>/api/profit/compute</code></h3>
+  <div class="row">
+    <pre id="prf">{ "price":15000, "variableCost":8000, "fixedCost":3000000, "unitsPerDay":40, "daysOpen":30, "marketingPercent":5 }</pre>
+    <button onclick="copy('prf')">Salin JSON</button>
+  </div>
+  <p><button onclick="call('prf','/api/profit/compute')">Tes panggil</button> <small id="prfOut"></small></p>
+</div>
+
+<script>
+  const dom = location.origin; document.getElementById('dom').textContent = dom;
+  function copy(id){navigator.clipboard.writeText(document.getElementById(id).textContent.trim());}
+  async function call(id, path){
+    const body = document.getElementById(id).textContent;
+    const out = document.getElementById(id+'Out');
+    out.textContent = '…';
+    try{
+      const r = await fetch(path,{method:'POST',headers:{'content-type':'application/json'},body});
+      out.textContent = r.status+' '+r.statusText+' → '+JSON.stringify(await r.json());
+    }catch(e){out.textContent = 'ERR '+e;}
+  }
+</script>
