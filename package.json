@@ -1,0 +1,13 @@
+{
+  "name": "sahabatumkm",
+  "version": "1.0.0",
+  "description": "FOODPRENEUR AI — API untuk UMKM kuliner (HPP, BEP, Profit)",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo \"no build\"",
+    "start": "node index.js"
+  },
+  "keywords": ["umkm", "foodpreneur", "hpp", "bep", "profit"],
+  "dependencies": {},
+  "devDependencies": {}
+}
